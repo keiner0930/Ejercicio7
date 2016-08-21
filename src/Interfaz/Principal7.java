@@ -5,6 +5,8 @@
  */
 package Interfaz;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author sony
@@ -53,6 +55,11 @@ public class Principal7 extends javax.swing.JFrame {
         txtAnios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtAniosActionPerformed(evt);
+            }
+        });
+        txtAnios.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAniosKeyTyped(evt);
             }
         });
         jPanel1.add(txtAnios, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 50, 30));
@@ -112,10 +119,19 @@ public class Principal7 extends javax.swing.JFrame {
      String total;
      int anios,bono;
      
+     if(txtAnios.getText().isEmpty()){
+     getToolkit().beep();
+     JOptionPane.showMessageDialog(this, "Digite El Numero de Años en la empresa","Error",JOptionPane.ERROR_MESSAGE);
+     txtAnios.requestFocusInWindow();
+     }
+     
+     else{
+        
      anios= Integer.parseInt(txtAnios.getText());
      bono=(anios*120000)-20000;
      total= String.valueOf(bono);
      txtMonto.setText(total);
+     }
      
     }//GEN-LAST:event_cmdCalcularActionPerformed
 
@@ -126,6 +142,15 @@ public class Principal7 extends javax.swing.JFrame {
      txtAnios.requestFocusInWindow();
   
     }//GEN-LAST:event_cmdBorrarActionPerformed
+
+    private void txtAniosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAniosKeyTyped
+      char c=evt.getKeyChar(); 
+     if(!Character.isDigit(c)) { 
+              getToolkit().beep();  
+              evt.consume();
+          } 
+        
+    }//GEN-LAST:event_txtAniosKeyTyped
 
     /**
      * @param args the command line arguments
